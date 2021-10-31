@@ -1,4 +1,5 @@
 <?php
+if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
 
 require './database/DB.php';
 

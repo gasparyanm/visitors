@@ -1,4 +1,5 @@
 <?php
+if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
 
 class ImageService {
     private ?string $imagePath = null;
@@ -32,11 +33,13 @@ class ImageService {
             return false;
         }
 
-        $fp = fopen($this->imagePath, 'rb');
+        $file = fopen($this->imagePath, 'rb');
 
         $this->addHeaders($this->imagePath);
 
-        fpassthru($fp);
+        fpassthru($file);
+
+        fclose($file);
     }
 }
 ?>

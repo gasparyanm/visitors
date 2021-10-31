@@ -1,4 +1,6 @@
-<?php 
+<?php
+if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
+
 	return [
 		'DB_HOST'     => '127.0.0.1',
 		'DB_PORT'     => 3306,

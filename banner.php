@@ -1,9 +1,10 @@
 <?php
+    if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
+
     require './services/ImageService.php';
     require './services/UserDetectorService.php';
 
-    // in case of we watch directly from script
-    $siteUrl =  $_SERVER['HTTP_REFERER'] ?? $_SERVER['REQUEST_URI'];
+    $siteUrl =  $_SERVER['HTTP_REFERER'];
 
     $userDetectorService = new UserDetectorService($siteUrl);
     $userDetectorService->saveVisitorData();

@@ -1,4 +1,5 @@
 <?php
+if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
 
 require './services/DatabaseService.php';
 
@@ -22,10 +23,14 @@ class UserDetectorService {
         $visitorData = $db->getVisitorData($data['page_url'], $data['ip_address'], $data['user_agent']);
 
         if (is_null($visitorData)) {
-            return DatabaseService::insertVisitorData($db, $data);
+            $data =  DatabaseService::insertVisitorData($db, $data);
+        } else {
+            $data = DatabaseService::updateVisitorData($db, $visitorData);
         }
 
-        return DatabaseService::updateVisitorData($db, $visitorData);
+        $db->close();
+
+        return $data;
     }
 
     private function getVisitorDefaultData(): array

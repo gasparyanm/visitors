@@ -1,4 +1,5 @@
 <?php
+if ( !isset( $_SERVER['HTTP_REFERER']) ) die ("Direct access not permitted");
 
 /**
  * Make connection to DB
@@ -39,6 +40,11 @@ class DB
         );
 
         return $this;
+    }
+
+    public function close()
+    {
+        $this->conn->close();
     }
 
     public function setChar(string $char): DB
